@@ -4,7 +4,7 @@ var createSlider = (obj, sliderInfo) => {
     let divs = [];
     let classesNames = ['slider-container', 'controller-container', 'controller', 'arrows-container'];
     for(let i = 0; i<classesNames.length; i++){
-        if((i==2) && (sliderInfo.hideCta == true)){
+        if((i==2) && (sliderInfo.hideCta === true)){
             break;
         }
         divs[i] = document.createElement("div");
