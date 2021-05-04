@@ -16,7 +16,7 @@ var createSlider = (obj, sliderInfo) => {
         console.log(sliderInfo.hideCta);
     }
     //creating arrows
-    if(sliderInfo.hideCta == false){
+    if(sliderInfo.hideCta==false){
         console.log("error_01");
         let arrows = [];
         for(let x = 0; x<2;x++){
