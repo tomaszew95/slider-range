@@ -4,7 +4,7 @@ var createSlider = (obj, sliderInfo) => {
     let divs = [];
     let classesNames = ['slider-container', 'controller-container', 'controller', 'arrows-container'];
     for(let i = 0; i<classesNames.length; i++){
-        if(i==2 && !sliderInfo.hideCta){
+        if(i==2 && sliderInfo.hideCta){
             console.log("error_00");
             break;
         }
@@ -17,6 +17,7 @@ var createSlider = (obj, sliderInfo) => {
     }
     //creating arrows
     if(sliderInfo.hideCta == false){
+        console.log("error_01");
         let arrows = [];
         for(let x = 0; x<2;x++){
             arrows[x] = document.createElementNS("http://www.w3.org/2000/svg", "svg");
@@ -49,6 +50,7 @@ var createSlider = (obj, sliderInfo) => {
     o.append(divs[0]);
     divs[0].append(divs[1], sliderRange);
     if(sliderInfo.hideCta == false){
+        console.log("error_02");
         divs[1].append(divs[2]);
         divs[2].append(divs[3]);
         divs[3].append(arrows[0], arrows[1]);
