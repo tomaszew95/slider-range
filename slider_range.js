@@ -4,7 +4,7 @@ var createSlider = (obj, sliderInfo) => {
     let divs = [];
     let classesNames = ['slider-container', 'controller-container', 'controller', 'arrows-container'];
     for(let i = 0; i<classesNames.length; i++){
-        if(i==2 && sliderInfo.hideCta){
+        if(i==2 && sliderInfo.hideCta==true){
             console.log("error_00");
             break;
         }
