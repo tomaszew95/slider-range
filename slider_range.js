@@ -4,7 +4,7 @@ var createSlider = (obj, sliderInfo) => {
     let divs = [];
     let classesNames = ['slider-container', 'controller-container', 'controller', 'arrows-container'];
     for(let i = 0; i<classesNames.length; i++){
-        if(i==2 && sliderInfo.hideCta==true){
+        if(i==2 && sliderInfo.hideCta=='true'){
             console.log("error_00");
             break;
         }
@@ -16,7 +16,7 @@ var createSlider = (obj, sliderInfo) => {
         console.log(sliderInfo.hideCta);
     }
     //creating arrows
-    if(sliderInfo.hideCta==false){
+    if(sliderInfo.hideCta=='false'){
         console.log("error_01");
         let arrows = [];
         for(let x = 0; x<2;x++){
@@ -49,7 +49,7 @@ var createSlider = (obj, sliderInfo) => {
     let o = document.getElementById(obj.id);
     o.append(divs[0]);
     divs[0].append(divs[1], sliderRange);
-    if(sliderInfo.hideCta == false){
+    if(sliderInfo.hideCta == 'false'){
         console.log("error_02");
         divs[1].append(divs[2]);
         divs[2].append(divs[3]);
@@ -112,7 +112,7 @@ var controlSlider = (e, sliderInfo) =>{
         if(controllerContainer.style.animation){
             controllerContainer.style.animation = null;
         }
-        if(sliderInfo.follow == false){
+        if(sliderInfo.follow == 'false'){
             val = slider.value;
         }
         else if(($this.offsetX >= 0) || ($this.offsetX <= $($this.target).width())){
@@ -169,7 +169,7 @@ var controlSlider = (e, sliderInfo) =>{
             hor = 100;
             ver = val;
         }
-        if((sliderInfo.setMargin) && (sliderInfo.hideCta == false)){
+        if((sliderInfo.setMargin=='true') && (sliderInfo.hideCta == 'false')){
             //odjac szerokosc linii??
             // margins = ((controller.width()/2)*100)/sliderContainerParent.width();
             margins = ((controller.width()/2)*100)/($(sliderContainer).width());
