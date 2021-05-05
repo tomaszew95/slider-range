@@ -89,7 +89,7 @@ var controlSlider = (e, sliderInfo) =>{
         }
     }
 
-    if(!sliderInfo.follow){
+    if(sliderInfo.follow=='false'){
         slider.addEventListener("input", sliderMove);
     }
     else{
