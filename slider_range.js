@@ -5,7 +5,6 @@ var createSlider = (obj, sliderInfo) => {
     let classesNames = ['slider-container', 'controller-container', 'controller', 'arrows-container'];
     for(let i = 0; i<classesNames.length; i++){
         if(i==2 && sliderInfo.hideCta=='true'){
-            console.log("error_00");
             break;
         }
         divs[i] = document.createElement("div");
@@ -30,7 +29,6 @@ var createSlider = (obj, sliderInfo) => {
                 arrows[x].classList.add("left-arrow");
                 continue;
             }
-            console.log("error_01");
             if(x==1){
                 arrows[x].classList.add("right-arrow");
                 break;
@@ -52,7 +50,6 @@ var createSlider = (obj, sliderInfo) => {
         divs[1].append(divs[2]);
         divs[2].append(divs[3]);
         divs[3].append(arrows[0], arrows[1]);
-        console.log("error_02");
     }
     return divs[0];
 }
@@ -73,12 +70,6 @@ var controlSlider = (e, sliderInfo) =>{
     }
     var beforeComps = getChildren(beforeComponents);
     var afterComps = getChildren(afterComponents);
-    var hor = 50 + "%";
-    var ver = 0 + "%";
-    if(sliderInfo.vertical){
-        hor = 0 + "%";
-        ver = 50 + "%";
-    }
 
     var sliderContainer = document.getElementById('slider' + sliderInfo.num);
     var sliderContainerParent = $(sliderContainer).parent();
@@ -118,42 +109,28 @@ var controlSlider = (e, sliderInfo) =>{
             val = ($this.offsetX * 100)/$($this.target).width();
         }
 
-        hor = val;
-        ver = 100;
-        if(sliderInfo.vertical){
-            hor = 100;
-            ver = val;
-        }
         if(val >= margins && val <= (100 - margins)){
-            controllerContainer.style.left = hor + '%';
-            clipPathFunction(beforeComps, ('0% ' + (100-hor) + '% ' + (100-ver) + '0%'));
-            clipPathFunction(afterComps, (Math.abs(ver-100) + ' 0% 0% ' + hor + '%'));
+            controllerContainer.style.left = val + '%';
+            clipPathFunction(beforeComps, ('0% ' + (100-val) + '% 0% 0%'));
+            clipPathFunction(afterComps, ('0% 0% 0% ' + val + '%'));
         }
         else if(val < margins){
             controllerContainer.style.left = (margins + '%');
             clipPathFunction(beforeComps, ('0% ' + (100-margins) + '% 0% 0%'));
             clipPathFunction(afterComps, ('0% 0% 0% ' + margins + '%'));
-            if(sliderInfo.vertical){
-                clipPathFunction(beforeComps, ('0% 0% ' + (100-margins) + '% 0%'));
-                clipPathFunction(afterComps, (margins + '% 0% 0% 0%'));
-            }
         }
         else{
             controllerContainer.style.left = ((100 - margins) + '%');
             clipPathFunction(beforeComps, ('0% ' + margins + '% 0% 0%'));
             clipPathFunction(afterComps, ('0% 0% 0% ' + (100-margins) + '%'));
-            if(sliderInfo.vertical){
-                clipPathFunction(beforeComps, ('0% 0% ' + margins + '% 0%'));
-                clipPathFunction(afterComps, ((100-margins) + '% 0% 0% 0%'));
-            }
         }
     };
 
     var localInitialFunction = () => {
         /* basics */
         controllerContainer.style.left = val + '%';
-        clipPathFunction(beforeComps, ('0% ' + hor + ' ' + ver + ' 0%'));
-        clipPathFunction(afterComps, (ver + ' 0% 0% ' + hor));
+        clipPathFunction(beforeComps, ('0% 50% 0% 0%'));
+        clipPathFunction(afterComps, ('0% 0% 0% 50%'));
         /* optional */
         if(sliderInfo.playAnim){
             controllerContainer.style.animation = 'sliderMove ' + sliderInfo.animType;
@@ -214,12 +191,11 @@ var controlSlider = (e, sliderInfo) =>{
 var setSliders = (sliders, exp) => {
     var info = [];
     class sliderInformations{
-        constructor(num, playAnim, animType, follow, vertical, hideCta, ctaSize, setMargin, lineWidth){
+        constructor(num, playAnim, animType, follow, hideCta, ctaSize, setMargin, lineWidth){
             this.num = num;
             this.playAnim = playAnim;
             this.animType = animType;
             this.follow = follow;
-            this.vertical = vertical;
             this.hideCta = hideCta;
             this.ctaSize = ctaSize;
             this.setMargin = setMargin;
@@ -232,7 +208,6 @@ var setSliders = (sliders, exp) => {
         var playAnimation = sliderPlugin.getAttribute("play-animation");
         var animationType = sliderPlugin.getAttribute("animation-type");
         var followCursor = sliderPlugin.getAttribute("follow-cursor");
-        var verticalOrientation = sliderPlugin.getAttribute("vertical-orientation");
         var hideButton = sliderPlugin.getAttribute("hide-button");
         var buttonSize = parseFloat(sliderPlugin.getAttribute("button-size"));
         var setMargins = sliderPlugin.getAttribute("set-margins");
@@ -253,9 +228,6 @@ var setSliders = (sliders, exp) => {
             if(value.indexOf("follow") > -1){
                 followCursor = 'true';
             }
-            if(value.indexOf("vertical") > -1){
-                verticalOrientation = 'true';
-            }
             if(value.indexOf("hide-button") > -1){
                 hideButton = 'true';
             }
@@ -271,7 +243,7 @@ var setSliders = (sliders, exp) => {
                 buttonSize = parseFloat(line);
             }
         });
-        info[i] = new sliderInformations(number, playAnimation, animationType, followCursor, verticalOrientation, hideButton, buttonSize, setMargins, lineThickness);
+        info[i] = new sliderInformations(number, playAnimation, animationType, followCursor, hideButton, buttonSize, setMargins, lineThickness);
         createSlider(sliders[i], info[i]);
         controlSlider(exp, info[i]);
     }
