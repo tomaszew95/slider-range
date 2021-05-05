@@ -145,7 +145,9 @@ var controlSlider = (e, sliderInfo) =>{
         if((sliderInfo.setMargin=='true') && (sliderInfo.hideCta == 'false')){
             //odjac szerokosc linii??
             // margins = ((controller.width()/2)*100)/sliderContainerParent.width();
-            margins = ((controller.width()/2)*100)/($(sliderContainer).width());
+            let controllerContainerW = parseFloat(window.getComputedStyle(document.documentElement).getPropertyValue('--controller-container-thickness'));
+            console.log(controllerContainerW);
+            margins = (((controller.width()/2)-(controllerContainerW/2))*100)/($(sliderContainer).width());
             console.log(margins);
 
         }
@@ -240,7 +242,7 @@ var setSliders = (sliders, exp) => {
             }
             if(value.indexOf("line-width:") > -1){
                 let line = value.slice(11, value.length).toString();
-                buttonSize = parseFloat(line);
+                lineThickness = parseFloat(line);
             }
         });
         info[i] = new sliderInformations(number, playAnimation, animationType, followCursor, hideButton, buttonSize, setMargins, lineThickness);
