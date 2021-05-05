@@ -118,15 +118,19 @@ var controlSlider = (e, sliderInfo) =>{
             val = ($this.offsetX * 100)/$($this.target).width();
         }
 
+        hor = val;
+        ver = 100;
+        if(sliderInfo.vertical){
+            hor = 100;
+            ver = val;
+        }
         if(val >= margins && val <= (100 - margins)){
             controllerContainer.style.left = hor + '%';
-
             clipPathFunction(beforeComps, ('0% ' + (100-hor) + '% ' + (100-ver) + '0%'));
             clipPathFunction(afterComps, (Math.abs(ver-100) + ' 0% 0% ' + hor + '%'));
         }
         else if(val < margins){
             controllerContainer.style.left = (margins + '%');
-
             clipPathFunction(beforeComps, ('0% ' + (100-margins) + '% 0% 0%'));
             clipPathFunction(afterComps, ('0% 0% 0% ' + margins + '%'));
             if(sliderInfo.vertical){
@@ -136,7 +140,6 @@ var controlSlider = (e, sliderInfo) =>{
         }
         else{
             controllerContainer.style.left = ((100 - margins) + '%');
-
             clipPathFunction(beforeComps, ('0% ' + margins + '% 0% 0%'));
             clipPathFunction(afterComps, ('0% 0% 0% ' + (100-margins) + '%'));
             if(sliderInfo.vertical){
@@ -151,8 +154,6 @@ var controlSlider = (e, sliderInfo) =>{
         controllerContainer.style.left = val + '%';
         clipPathFunction(beforeComps, ('0% ' + hor + ' ' + ver + ' 0%'));
         clipPathFunction(afterComps, (ver + ' 0% 0% ' + hor));
-        hor = val;
-        ver = 100;
         /* optional */
         if(sliderInfo.playAnim){
             controllerContainer.style.animation = 'sliderMove ' + sliderInfo.animType;
@@ -163,10 +164,6 @@ var controlSlider = (e, sliderInfo) =>{
             }
             styleFunction(beforeComps, 'compAnimBefore ');
             styleFunction(afterComps, 'compAnimAfter ');
-        }
-        if(sliderInfo.vertical){
-            hor = 100;
-            ver = val;
         }
         if((sliderInfo.setMargin=='true') && (sliderInfo.hideCta == 'false')){
             //odjac szerokosc linii??
