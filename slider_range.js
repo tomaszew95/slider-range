@@ -13,11 +13,9 @@ var createSlider = (obj, sliderInfo) => {
         if(i==0){
             divs[i].id = "slider" + (sliderInfo.num).toString();
         }
-        console.log(sliderInfo.hideCta);
     }
     //creating arrows
     if(sliderInfo.hideCta=='false'){
-        console.log("error_01");
         let arrows = [];
         for(let x = 0; x<2;x++){
             arrows[x] = document.createElementNS("http://www.w3.org/2000/svg", "svg");
@@ -32,6 +30,7 @@ var createSlider = (obj, sliderInfo) => {
                 arrows[x].classList.add("left-arrow");
                 continue;
             }
+            console.log("error_01");
             if(x==1){
                 arrows[x].classList.add("right-arrow");
                 break;
@@ -50,10 +49,10 @@ var createSlider = (obj, sliderInfo) => {
     o.append(divs[0]);
     divs[0].append(divs[1], sliderRange);
     if(sliderInfo.hideCta == 'false'){
-        console.log("error_02");
         divs[1].append(divs[2]);
         divs[2].append(divs[3]);
         divs[3].append(arrows[0], arrows[1]);
+        console.log("error_02");
     }
     return divs[0];
 }
