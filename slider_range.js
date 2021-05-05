@@ -15,8 +15,8 @@ var createSlider = (obj, sliderInfo) => {
         }
     }
     //creating arrows
+    let arrows = [];
     if(sliderInfo.hideCta=='false'){
-        let arrows = [];
         for(let x = 0; x<2;x++){
             arrows[x] = document.createElementNS("http://www.w3.org/2000/svg", "svg");
             arrows[x].classList.add("arrows");
