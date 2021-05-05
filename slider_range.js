@@ -247,27 +247,27 @@ var setSliders = (sliders, exp) => {
                 number = parseInt(sliderNumber);
             }
             if(value.indexOf("play-animation") > -1){
-                playAnimation = true;
+                playAnimation = 'true';
             }
             if(value.indexOf("anim:") > -1){
                 let a = value.slice(5, value.length).toString();
                 animationType = a.replaceAll("-", " ");
             }
             if(value.indexOf("follow") > -1){
-                followCursor = true;
+                followCursor = 'true';
             }
             if(value.indexOf("vertical") > -1){
-                verticalOrientation = true;
+                verticalOrientation = 'true';
             }
             if(value.indexOf("hide-button") > -1){
-                hideButton = true;
+                hideButton = 'true';
             }
             if(value.indexOf("button-size:") > -1){
                 let cta = value.slice(12, value.length).toString();
                 buttonSize = parseFloat(cta);
             }
             if(value.indexOf("set-margins") > -1){
-                setMargins = true;
+                setMargins = 'true';
             }
             if(value.indexOf("line-width:") > -1){
                 let line = value.slice(11, value.length).toString();
