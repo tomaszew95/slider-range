@@ -144,8 +144,8 @@ var controlSlider = (e, sliderInfo) =>{
         }
         if((sliderInfo.setMargin=='true') && (sliderInfo.hideCta == 'false')){
             //odjac szerokosc linii??
-            margins = ((controller.width()/2)*100)/sliderContainerParent.width();
-            // margins = ((controller.width()/2)*100)/($(sliderContainer).width());
+            // margins = ((controller.width()/2)*100)/sliderContainerParent.width();
+            margins = ((controller.width()/2)*100)/($(sliderContainer).width());
             console.log(margins);
 
         }
