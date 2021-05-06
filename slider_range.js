@@ -56,13 +56,14 @@ var controlSlider = (e, sliderInfo) =>{
             let component = document.getElementById(components[i].id);
             //jesli ma child'a, jesli nie uzyj parenta
             //najlepiej jesli pobieraloby to wszyskie children (video)
-            let comp = $(component).children().first()[0];
+            let comp = $(component).children().toArray();
             allChildren[i] = comp;
         }
         return allChildren;
     }
     var beforeComps = getChildren(beforeComponents);
     var afterComps = getChildren(afterComponents);
+    console.log(beforeComps, afterComps);
 
     var sliderContainer = document.getElementById('slider' + sliderInfo.num);
     var slider = sliderContainer.querySelector('input');
@@ -102,39 +103,63 @@ var controlSlider = (e, sliderInfo) =>{
 
         if(val >= margins && val <= (100 - margins)){
             controllerContainer.style.left = val + '%';
-            clipPathFunction(beforeComps, ('0% ' + (100-val) + '% 0% 0%'));
-            clipPathFunction(afterComps, ('0% 0% 0% ' + val + '%'));
+            for(let before of beforeComps){
+                clipPathFunction(before, ('0% ' + (100-val) + '% 0% 0%'));
+            }for(let after of afterComps){
+                clipPathFunction(after, ('0% 0% 0% ' + val + '%'));
+            }
+            // clipPathFunction(beforeComps, ('0% ' + (100-val) + '% 0% 0%'));
+            // clipPathFunction(afterComps, ('0% 0% 0% ' + val + '%'));
         }
         else if(val < margins){
             controllerContainer.style.left = (margins + '%');
-            clipPathFunction(beforeComps, ('0% ' + (100-margins) + '% 0% 0%'));
-            clipPathFunction(afterComps, ('0% 0% 0% ' + margins + '%'));
+            for(let before of beforeComps){
+                clipPathFunction(before, ('0% ' + (100-margins) + '% 0% 0%'));
+            }for(let after of afterComps){
+                clipPathFunction(after, ('0% 0% 0% ' + margins + '%'));
+            }
+            // clipPathFunction(beforeComps, ('0% ' + (100-margins) + '% 0% 0%'));
+            // clipPathFunction(afterComps, ('0% 0% 0% ' + margins + '%'));
         }
         else{
             controllerContainer.style.left = ((100 - margins) + '%');
-            clipPathFunction(beforeComps, ('0% ' + margins + '% 0% 0%'));
-            clipPathFunction(afterComps, ('0% 0% 0% ' + (100-margins) + '%'));
+            for(let before of beforeComps){
+                clipPathFunction(before, ('0% ' + margins + '% 0% 0%'));
+            }for(let after of afterComps){
+                clipPathFunction(after, ('0% 0% 0% ' + (100-margins) + '%'));
+            }
+            // clipPathFunction(beforeComps, ('0% ' + margins + '% 0% 0%'));
+            // clipPathFunction(afterComps, ('0% 0% 0% ' + (100-margins) + '%'));
         }
     };
 
     var localInitialFunction = () => {
         /* basics */
         controllerContainer.style.left = val + '%';
-        clipPathFunction(beforeComps, ('0% 50% 0% 0%'));
-        clipPathFunction(afterComps, ('0% 0% 0% 50%'));
+        for(let before of beforeComps){
+            clipPathFunction(before, ('0% 50% 0% 0%'));
+        }for(let after of afterComps){
+            clipPathFunction(after, ('0% 0% 0% 50%'));
+        }
+        // clipPathFunction(beforeComps, ('0% 50% 0% 0%'));
+        // clipPathFunction(afterComps, ('0% 0% 0% 50%'));
         /* optional */
-        if(sliderInfo.playAnim){
+        if(sliderInfo.playAnim=='true'){
             controllerContainer.style.animation = 'sliderMove ' + sliderInfo.animType;
             let styleFunction = (arr, animName) =>{
                 for(let ar of arr){
                     ar.style.setProperty('animation', animName + sliderInfo.animType);
                 }
             }
-            styleFunction(beforeComps, 'compAnimBefore ');
-            styleFunction(afterComps, 'compAnimAfter ');
+            for(let before of beforeComps){
+                styleFunction(before, 'compAnimBefore ');
+            }for(let after of afterComps){
+                styleFunction(after, 'compAnimAfter ');
+            }
+            // styleFunction(beforeComps, 'compAnimBefore ');
+            // styleFunction(afterComps, 'compAnimAfter ');
         }
         //if not defined it is equal 6px
-        // controllerContainer.style.width = sliderInfo.lineSize + 'px';
         controllerContainer.style.width = document.documentElement.style.setProperty('--controller-container-thickness', (sliderInfo.lineSize + 'px'));
         if(sliderInfo.hideCta=='true'){
             controller.style.opacity = 0;
