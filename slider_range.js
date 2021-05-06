@@ -134,7 +134,8 @@ var controlSlider = (e, sliderInfo) =>{
             styleFunction(afterComps, 'compAnimAfter ');
         }
         //if not defined it is equal 6px
-        controllerContainer.style.width = sliderInfo.lineSize + 'px';
+        // controllerContainer.style.width = sliderInfo.lineSize + 'px';
+        controllerContainer.style.width = window.getComputedStyle(document.documentElement).setProperty('--controller-container-thickness', (sliderInfo.lineSize + 'px'));
         if(sliderInfo.hideCta=='true'){
             controller.style.opacity = 0;
         }
