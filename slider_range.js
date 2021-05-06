@@ -141,8 +141,7 @@ var controlSlider = (e, sliderInfo) =>{
         //if not defined it is equal 1
         controller.style.transform = 'scale(' + sliderInfo.ctaSize + ')';
         if(sliderInfo.setMargin=='true'){
-            margins = (($(controller).width()/2)*100)/($(sliderContainer).width());
-            console.log($(controller).width());
+            margins = ((($(controller).width()*sliderInfo.ctaSize)/2)*100)/($(sliderContainer).width());
         }
     }
     localInitialFunction();
