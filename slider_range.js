@@ -165,9 +165,9 @@ var controlSlider = (e, sliderInfo) =>{
             controller.style.opacity = 0;
         }
         //if not defined it is equal 1
-        controller.style.transform = 'scale(' + sliderInfo.ctaSize + ')';
+        controller.style.transform = 'scale(' + sliderInfo.ctaScale + ')';
         if(sliderInfo.setMargin=='true'){
-            margins = ((($(controller).width()*sliderInfo.ctaSize)/2)*100)/($(sliderContainer).width());
+            margins = ((($(controller).width()*sliderInfo.ctaScale)/2)*100)/($(sliderContainer).width());
         }
     }
     localInitialFunction();
@@ -211,13 +211,13 @@ var controlSlider = (e, sliderInfo) =>{
 var setSliders = (sliders, exp) => {
     var info = [];
     class sliderInformations{
-        constructor(num, playAnim, animType, follow, hideCta, ctaSize, setMargin, lineSize){
+        constructor(num, playAnim, animType, follow, hideCta, ctaScale, setMargin, lineSize){
             this.num = num;
             this.playAnim = playAnim;
             this.animType = animType;
             this.follow = follow;
             this.hideCta = hideCta;
-            this.ctaSize = ctaSize;
+            this.ctaScale = ctaScale;
             this.setMargin = setMargin;
             this.lineSize = lineSize;
         }
@@ -229,7 +229,7 @@ var setSliders = (sliders, exp) => {
         var animationType = sliderPlugin.getAttribute("animation-type");
         var followCursor = sliderPlugin.getAttribute("follow-cursor");
         var hideButton = sliderPlugin.getAttribute("hide-button");
-        var buttonSize = parseFloat(sliderPlugin.getAttribute("button-size"));
+        var buttonScale = parseFloat(sliderPlugin.getAttribute("button-size"));
         var setMargins = sliderPlugin.getAttribute("set-margins");
         var lineWidth = parseFloat(sliderPlugin.getAttribute("line-width"));
 
@@ -251,9 +251,9 @@ var setSliders = (sliders, exp) => {
             if(value.indexOf("hide-button") > -1){
                 hideButton = 'true';
             }
-            if(value.indexOf("button-size:") > -1){
-                let cta = value.slice(12, value.length).toString();
-                buttonSize = cta;
+            if(value.indexOf("button-scale:") > -1){
+                let cta = value.slice(13, value.length).toString();
+                buttonScale = cta;
             }
             if(value.indexOf("set-margins") > -1){
                 setMargins = 'true';
@@ -263,7 +263,7 @@ var setSliders = (sliders, exp) => {
                 lineWidth = parseFloat(line);
             }
         });
-        info[i] = new sliderInformations(number, playAnimation, animationType, followCursor, hideButton, buttonSize, setMargins, lineWidth);
+        info[i] = new sliderInformations(number, playAnimation, animationType, followCursor, hideButton, buttonScale, setMargins, lineWidth);
         createSlider(sliders[i], info[i]);
         controlSlider(exp, info[i]);
     }
