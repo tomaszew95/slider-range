@@ -54,8 +54,6 @@ var controlSlider = (e, sliderInfo) =>{
         let allChildren = [];
         for(let i = 0; i<components.length; i++){
             let component = document.getElementById(components[i].id);
-            //jesli ma child'a, jesli nie uzyj parenta
-            //najlepiej jesli pobieraloby to wszyskie children (video)
             let comp = $(component).children().toArray();
             allChildren[i] = comp;
         }
@@ -63,7 +61,6 @@ var controlSlider = (e, sliderInfo) =>{
     }
     var beforeComps = getChildren(beforeComponents);
     var afterComps = getChildren(afterComponents);
-    console.log(beforeComps, afterComps);
 
     var sliderContainer = document.getElementById('slider' + sliderInfo.num);
     var slider = sliderContainer.querySelector('input');
@@ -87,7 +84,7 @@ var controlSlider = (e, sliderInfo) =>{
     else{
         sliderContainer.addEventListener("mousemove", sliderMove);
         //usunac "mouseout"?
-        sliderContainer.addEventListener("mouseout", sliderMove);
+        // sliderContainer.addEventListener("mouseout", sliderMove);
     }
 
     function sliderMove($this){
@@ -108,8 +105,6 @@ var controlSlider = (e, sliderInfo) =>{
             }for(let after of afterComps){
                 clipPathFunction(after, ('0% 0% 0% ' + val + '%'));
             }
-            // clipPathFunction(beforeComps, ('0% ' + (100-val) + '% 0% 0%'));
-            // clipPathFunction(afterComps, ('0% 0% 0% ' + val + '%'));
         }
         else if(val < margins){
             controllerContainer.style.left = (margins + '%');
@@ -118,8 +113,6 @@ var controlSlider = (e, sliderInfo) =>{
             }for(let after of afterComps){
                 clipPathFunction(after, ('0% 0% 0% ' + margins + '%'));
             }
-            // clipPathFunction(beforeComps, ('0% ' + (100-margins) + '% 0% 0%'));
-            // clipPathFunction(afterComps, ('0% 0% 0% ' + margins + '%'));
         }
         else{
             controllerContainer.style.left = ((100 - margins) + '%');
@@ -128,8 +121,6 @@ var controlSlider = (e, sliderInfo) =>{
             }for(let after of afterComps){
                 clipPathFunction(after, ('0% 0% 0% ' + (100-margins) + '%'));
             }
-            // clipPathFunction(beforeComps, ('0% ' + margins + '% 0% 0%'));
-            // clipPathFunction(afterComps, ('0% 0% 0% ' + (100-margins) + '%'));
         }
     };
 
@@ -141,8 +132,6 @@ var controlSlider = (e, sliderInfo) =>{
         }for(let after of afterComps){
             clipPathFunction(after, ('0% 0% 0% 50%'));
         }
-        // clipPathFunction(beforeComps, ('0% 50% 0% 0%'));
-        // clipPathFunction(afterComps, ('0% 0% 0% 50%'));
         /* optional */
         if(sliderInfo.playAnim=='true'){
             controllerContainer.style.animation = 'sliderMove ' + sliderInfo.animType;
@@ -156,8 +145,6 @@ var controlSlider = (e, sliderInfo) =>{
             }for(let after of afterComps){
                 styleFunction(after, 'compAnimAfter ');
             }
-            // styleFunction(beforeComps, 'compAnimBefore ');
-            // styleFunction(afterComps, 'compAnimAfter ');
         }
         //if not defined it is equal 6px
         controllerContainer.style.width = document.documentElement.style.setProperty('--controller-container-thickness', (sliderInfo.lineSize + 'px'));
