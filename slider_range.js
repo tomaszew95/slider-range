@@ -136,7 +136,7 @@ var controlSlider = (e, sliderInfo) =>{
         //if not defined it is equal 6px
         // controllerContainer.style.width = sliderInfo.lineSize + 'px';
         // controllerContainer.style.width = window.getComputedStyle(document.documentElement).setProperty('--controller-container-thickness', (sliderInfo.lineSize + 'px'));
-        // console.log(controllerContainer.style.width);
+        console.log(controllerContainer.style.width);
         // console.log(window.getComputedStyle(document.documentElement).setProperty('--controller-container-thickness', (sliderInfo.lineSize + 'px')));
         if(sliderInfo.hideCta=='true'){
             controller.style.opacity = 0;
