@@ -4,9 +4,6 @@ var createSlider = (obj, sliderInfo) => {
     let divs = [];
     let classesNames = ['slider-container', 'controller-container', 'controller', 'arrows-container'];
     for(let i = 0; i<classesNames.length; i++){
-        if(i==2 && sliderInfo.hideCta=='true'){
-            break;
-        }
         divs[i] = document.createElement("div");
         divs[i].classList.add(classesNames[i]);
         if(i==0){
@@ -15,24 +12,22 @@ var createSlider = (obj, sliderInfo) => {
     }
     //creating arrows
     let arrows = [];
-    if(sliderInfo.hideCta=='false'){
-        for(let x = 0; x<2;x++){
-            arrows[x] = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-            arrows[x].classList.add("arrows");
-            arrows[x].setAttribute("viewBox", "0 0 100 100");
-            document.body.append(arrows[x]);
-            let arrowPath = document.createElementNS("http://www.w3.org/2000/svg", "path");
-            arrowPath.classList.add("arrow");
-            arrowPath.setAttribute("d", sliderPlugin.getAttribute("arrows"));
-            arrows[x].append(arrowPath);
-            if(x==0){
-                arrows[x].classList.add("left-arrow");
-                continue;
-            }
-            if(x==1){
-                arrows[x].classList.add("right-arrow");
-                break;
-            }
+    for(let x = 0; x<2;x++){
+        arrows[x] = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+        arrows[x].classList.add("arrows");
+        arrows[x].setAttribute("viewBox", "0 0 100 100");
+        document.body.append(arrows[x]);
+        let arrowPath = document.createElementNS("http://www.w3.org/2000/svg", "path");
+        arrowPath.classList.add("arrow");
+        arrowPath.setAttribute("d", sliderPlugin.getAttribute("arrows"));
+        arrows[x].append(arrowPath);
+        if(x==0){
+            arrows[x].classList.add("left-arrow");
+            continue;
+        }
+        if(x==1){
+            arrows[x].classList.add("right-arrow");
+            break;
         }
     }
     //creating input element
@@ -46,11 +41,9 @@ var createSlider = (obj, sliderInfo) => {
     let o = document.getElementById(obj.id);
     o.append(divs[0]);
     divs[0].append(divs[1], sliderRange);
-    if(sliderInfo.hideCta == 'false'){
-        divs[1].append(divs[2]);
-        divs[2].append(divs[3]);
-        divs[3].append(arrows[0], arrows[1]);
-    }
+    divs[1].append(divs[2]);
+    divs[2].append(divs[3]);
+    divs[3].append(arrows[0], arrows[1]);
     return divs[0];
 }
 
@@ -72,11 +65,9 @@ var controlSlider = (e, sliderInfo) =>{
     var afterComps = getChildren(afterComponents);
 
     var sliderContainer = document.getElementById('slider' + sliderInfo.num);
-    var sliderContainerParent = $(sliderContainer).parent();
     var slider = sliderContainer.querySelector('input');
     var controllerContainer = sliderContainer.querySelector('.controller-container');
-    var controller = $(controllerContainer).children().first();
-    // var controlLeft = controllerContainer.style.left;
+    var controller = controllerContainer.querySelector('.controller');
     var val = slider.getAttribute("value");
     var margins = 0;
 
@@ -142,14 +133,11 @@ var controlSlider = (e, sliderInfo) =>{
             styleFunction(beforeComps, 'compAnimBefore ');
             styleFunction(afterComps, 'compAnimAfter ');
         }
-        if((sliderInfo.setMargin=='true') && (sliderInfo.hideCta == 'false')){
-            //odjac szerokosc linii??
-            // margins = ((controller.width()/2)*100)/sliderContainerParent.width();
-            let controllerContainerW = parseFloat(window.getComputedStyle(document.documentElement).getPropertyValue('--controller-container-thickness'));
-            console.log(controllerContainerW);
-            margins = (((controller.width()/2)-(controllerContainerW/2))*100)/($(sliderContainer).width());
-            console.log(margins);
-
+        if(sliderInfo.hideCta=='true'){
+            controller.style.opacity = 0;
+        }
+        if(sliderInfo.setMargin=='true'){
+            margins = (($(controller).width()/2)*100)/($(sliderContainer).width());
         }
     }
     localInitialFunction();
