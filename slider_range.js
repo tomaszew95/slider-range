@@ -133,9 +133,13 @@ var controlSlider = (e, sliderInfo) =>{
             styleFunction(beforeComps, 'compAnimBefore ');
             styleFunction(afterComps, 'compAnimAfter ');
         }
+        //if not defined it is equal 6px
+        controllerContainer.style.width = sliderInfo.lineSize + 'px';
         if(sliderInfo.hideCta=='true'){
             controller.style.opacity = 0;
         }
+        //if not defined it is equal 1
+        controller.style.transform = 'scale(' + sliderInfo.ctaSize + ')';
         if(sliderInfo.setMargin=='true'){
             margins = (($(controller).width()/2)*100)/($(sliderContainer).width());
         }
@@ -181,7 +185,7 @@ var controlSlider = (e, sliderInfo) =>{
 var setSliders = (sliders, exp) => {
     var info = [];
     class sliderInformations{
-        constructor(num, playAnim, animType, follow, hideCta, ctaSize, setMargin, lineWidth){
+        constructor(num, playAnim, animType, follow, hideCta, ctaSize, setMargin, lineSize){
             this.num = num;
             this.playAnim = playAnim;
             this.animType = animType;
@@ -189,7 +193,7 @@ var setSliders = (sliders, exp) => {
             this.hideCta = hideCta;
             this.ctaSize = ctaSize;
             this.setMargin = setMargin;
-            this.lineWidth = lineWidth;
+            this.lineSize = lineSize;
         }
     }
     for(let i = 0;i<sliders.length;i++){
@@ -201,7 +205,7 @@ var setSliders = (sliders, exp) => {
         var hideButton = sliderPlugin.getAttribute("hide-button");
         var buttonSize = parseFloat(sliderPlugin.getAttribute("button-size"));
         var setMargins = sliderPlugin.getAttribute("set-margins");
-        var lineThickness = parseFloat(sliderPlugin.getAttribute("line-thickness"));
+        var lineWidth = parseFloat(sliderPlugin.getAttribute("line-width"));
 
         _.forEach(tags, function(value, key){
             if(value.indexOf("slider:") > -1){
@@ -223,17 +227,17 @@ var setSliders = (sliders, exp) => {
             }
             if(value.indexOf("button-size:") > -1){
                 let cta = value.slice(12, value.length).toString();
-                buttonSize = parseFloat(cta);
+                buttonSize = cta;
             }
             if(value.indexOf("set-margins") > -1){
                 setMargins = 'true';
             }
             if(value.indexOf("line-width:") > -1){
                 let line = value.slice(11, value.length).toString();
-                lineThickness = parseFloat(line);
+                lineWidth = parseFloat(line);
             }
         });
-        info[i] = new sliderInformations(number, playAnimation, animationType, followCursor, hideButton, buttonSize, setMargins, lineThickness);
+        info[i] = new sliderInformations(number, playAnimation, animationType, followCursor, hideButton, buttonSize, setMargins, lineWidth);
         createSlider(sliders[i], info[i]);
         controlSlider(exp, info[i]);
     }
