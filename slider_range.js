@@ -94,8 +94,8 @@ var controlSlider = (e, sliderInfo) =>{
             val = slider.value;
         }
         else if(($this.offsetX >= 0) || ($this.offsetX <= $($this.target).width())){
-            val = ($this.offsetX * 100)/$($this.target).width();
             console.log($this, $this.offsetX);
+            val = ($this.offsetX * 100)/$($this.target).width();
         }
         if(val >= margins && val <= (100 - margins)){
             controllerContainer.style.left = val + '%';
@@ -146,7 +146,9 @@ var controlSlider = (e, sliderInfo) =>{
             }
         }
         //if not defined it is equal 6px
-        controllerContainer.style.width = document.documentElement.style.setProperty('--controller-container-thickness', (sliderInfo.lineSize + 'px'));
+        // controllerContainer.style.width = document.documentElement.style.setProperty('--controller-container-thickness', (sliderInfo.lineSize + 'px'));
+        controllerContainer.style.width = sliderInfo.lineSize + 'px';
+        console.log(controllerContainer.style.width);
         if(sliderInfo.hideCta=='true'){
             controller.style.opacity = 0;
         }
