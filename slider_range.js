@@ -95,8 +95,8 @@ var controlSlider = (e, sliderInfo) =>{
         }
         else if(($this.offsetX >= 0) || ($this.offsetX <= $($this.target).width())){
             val = ($this.offsetX * 100)/$($this.target).width();
+            console.log($this, $this.offsetX);
         }
-        console.log($this, $this.offsetX);
         if(val >= margins && val <= (100 - margins)){
             controllerContainer.style.left = val + '%';
             for(let before of beforeComps){
@@ -207,11 +207,12 @@ class sliderInformations{
         this.lineSize = lineSize;
     }
 }
-
+var sliderInfoArr = [];
+var slidersArr = [];
 var setSliders = (sliders, exp) => {
     for(let i = 0;i<sliders.length;i++){
-        var info = [];
-        var tags = sliders[i].getTags();
+        slidersArr.push(sliders[i]);
+        var tags = slidersArr[slidersArr.length-1].getTags();
         var number = i +1;
         var playAnimation = sliderPlugin.getAttribute("play-animation");
         var animationType = sliderPlugin.getAttribute("animation-type");
@@ -251,9 +252,8 @@ var setSliders = (sliders, exp) => {
                 lineWidth = parseFloat(line);
             }
         });
-        info[i] = new sliderInformations(number, playAnimation, animationType, followCursor, hideButton, buttonScale, setMargins, lineWidth);
-        let mainSlider = createSlider(sliders[i], info[i]);
-        console.log(mainSlider);
-        controlSlider(exp, info[i]);
+        sliderInfoArr.push(new sliderInformations(number, playAnimation, animationType, followCursor, hideButton, buttonScale, setMargins, lineWidth));
+        createSlider(slidersArr[slidersArr.length-1], sliderInfoArr[sliderInfoArr.length-1]);
+        controlSlider(exp, sliderInfoArr[sliderInfoArr.length-1]);
     }
 }
