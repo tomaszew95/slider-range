@@ -94,7 +94,6 @@ var controlSlider = (e, sliderInfo) =>{
             val = slider.value;
         }
         else if(($this.offsetX >= 0) || ($this.offsetX <= $($this.target).width())){
-            console.log($this.offsetX, $($this.target).width());
             val = ($this.offsetX * 100)/$($this.target).width();
         }
         if(val >= margins && val <= (100 - margins)){
