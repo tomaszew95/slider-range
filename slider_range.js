@@ -83,12 +83,11 @@ var controlSlider = (e, sliderInfo) =>{
     }
     else{
         sliderContainer.addEventListener("mousemove", sliderMove);
-        //usunac "mouseout"?
-        // sliderContainer.addEventListener("mouseout", sliderMove);
+        sliderContainer.addEventListener("mouseleave", sliderMove);
     }
 
     function sliderMove($this){
-        if(controllerContainer.style.animation){
+        if(controllerContainer.style.animation != null){
             controllerContainer.style.animation = null;
         }
         if(sliderInfo.follow == 'false'){
@@ -97,7 +96,7 @@ var controlSlider = (e, sliderInfo) =>{
         else if(($this.offsetX >= 0) || ($this.offsetX <= $($this.target).width())){
             val = ($this.offsetX * 100)/$($this.target).width();
         }
-
+        console.log($this, $this.offsetX);
         if(val >= margins && val <= (100 - margins)){
             controllerContainer.style.left = val + '%';
             for(let before of beforeComps){
@@ -196,21 +195,22 @@ var controlSlider = (e, sliderInfo) =>{
     });
 })();
 
-var setSliders = (sliders, exp) => {
-    var info = [];
-    class sliderInformations{
-        constructor(num, playAnim, animType, follow, hideCta, ctaScale, setMargin, lineSize){
-            this.num = num;
-            this.playAnim = playAnim;
-            this.animType = animType;
-            this.follow = follow;
-            this.hideCta = hideCta;
-            this.ctaScale = ctaScale;
-            this.setMargin = setMargin;
-            this.lineSize = lineSize;
-        }
+class sliderInformations{
+    constructor(num, playAnim, animType, follow, hideCta, ctaScale, setMargin, lineSize){
+        this.num = num;
+        this.playAnim = playAnim;
+        this.animType = animType;
+        this.follow = follow;
+        this.hideCta = hideCta;
+        this.ctaScale = ctaScale;
+        this.setMargin = setMargin;
+        this.lineSize = lineSize;
     }
+}
+
+var setSliders = (sliders, exp) => {
     for(let i = 0;i<sliders.length;i++){
+        var info = [];
         var tags = sliders[i].getTags();
         var number = i +1;
         var playAnimation = sliderPlugin.getAttribute("play-animation");
