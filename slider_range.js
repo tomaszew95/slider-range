@@ -48,6 +48,7 @@ var createSlider = (obj, sliderInfo) => {
 }
 
 var controlSlider = (e, sliderInfo) =>{
+    //defining images
     var beforeComponents = e.findLayersByTag('before' + sliderInfo.num).layers;
     var afterComponents = e.findLayersByTag('after' + sliderInfo.num).layers;
     var getChildren = (components) =>{
@@ -61,22 +62,13 @@ var controlSlider = (e, sliderInfo) =>{
     }
     var beforeComps = getChildren(beforeComponents);
     var afterComps = getChildren(afterComponents);
-
+    //defining variables of specific slider
     var sliderContainer = document.getElementById('slider' + sliderInfo.num);
     var slider = sliderContainer.querySelector('input');
     var controllerContainer = sliderContainer.querySelector('.controller-container');
     var controller = controllerContainer.querySelector('.controller');
     var val = slider.getAttribute("value");
     var margins = 0;
-
-    let clipPathFunction = (arr, v) =>{
-        let inset = ('inset(' + v.toString() + ')');
-        for(let ar of arr){
-            ar.style.animation = null;
-            ar.style.setProperty('-webkit-clip-path', inset.toString());
-            ar.style.setProperty('clip-path', inset.toString());
-        }
-    }
 
     if(sliderInfo.follow=='false'){
         slider.addEventListener("input", sliderMove);
@@ -86,6 +78,14 @@ var controlSlider = (e, sliderInfo) =>{
         sliderContainer.addEventListener("mouseleave", sliderMove);
     }
 
+    let clipPathFunction = (arr, v) =>{
+        let inset = ('inset(' + v.toString() + ')');
+        for(let ar of arr){
+            ar.style.animation = null;
+            ar.style.setProperty('-webkit-clip-path', inset.toString());
+            ar.style.setProperty('clip-path', inset.toString());
+        }
+    }
     function sliderMove($this){
         if(controllerContainer.style.animation != null){
             controllerContainer.style.animation = null;
@@ -94,7 +94,7 @@ var controlSlider = (e, sliderInfo) =>{
             val = slider.value;
         }
         else if(($this.offsetX >= 0) || ($this.offsetX <= $($this.target).width())){
-            console.log($this, $this.offsetX);
+            console.log($this.offsetX, $($this.target).width());
             val = ($this.offsetX * 100)/$($this.target).width();
         }
         if(val >= margins && val <= (100 - margins)){
@@ -124,14 +124,14 @@ var controlSlider = (e, sliderInfo) =>{
     };
 
     var localInitialFunction = () => {
-        /* basics */
+        /* basics settings */
         controllerContainer.style.left = val + '%';
         for(let before of beforeComps){
             clipPathFunction(before, ('0% 50% 0% 0%'));
         }for(let after of afterComps){
             clipPathFunction(after, ('0% 0% 0% 50%'));
         }
-        /* optional */
+        /* optional settings */
         if(sliderInfo.playAnim=='true'){
             controllerContainer.style.animation = 'sliderMove ' + sliderInfo.animType;
             let styleFunction = (arr, animName) =>{
@@ -145,14 +145,10 @@ var controlSlider = (e, sliderInfo) =>{
                 styleFunction(after, 'compAnimAfter ');
             }
         }
-        //if not defined it is equal 6px
-        // controllerContainer.style.width = document.documentElement.style.setProperty('--controller-container-thickness', (sliderInfo.lineSize + 'px'));
         controllerContainer.style.width = sliderInfo.lineSize + 'px';
-        console.log(controllerContainer.style.width);
         if(sliderInfo.hideCta=='true'){
             controller.style.opacity = 0;
         }
-        //if not defined it is equal 1
         controller.style.transform = 'scale(' + sliderInfo.ctaScale + ')';
         if(sliderInfo.setMargin=='true'){
             margins = ((($(controller).width()*sliderInfo.ctaScale)/2)*100)/($(sliderContainer).width());
@@ -191,7 +187,6 @@ var controlSlider = (e, sliderInfo) =>{
                         }
                     });
                     setSliders(currentPageSliderObjects, experience);
-                    console.log(currentPageSliderObjects);
                 }
             })
     });
@@ -209,12 +204,10 @@ class sliderInformations{
         this.lineSize = lineSize;
     }
 }
-var sliderInfoArr = [];
-var slidersArr = [];
 var setSliders = (sliders, exp) => {
+    var info = [];
     for(let i = 0;i<sliders.length;i++){
-        slidersArr.push(sliders[i]);
-        var tags = slidersArr[slidersArr.length-1].getTags();
+        var tags = sliders[i].getTags();
         var number = i +1;
         var playAnimation = sliderPlugin.getAttribute("play-animation");
         var animationType = sliderPlugin.getAttribute("animation-type");
@@ -254,8 +247,8 @@ var setSliders = (sliders, exp) => {
                 lineWidth = parseFloat(line);
             }
         });
-        sliderInfoArr.push(new sliderInformations(number, playAnimation, animationType, followCursor, hideButton, buttonScale, setMargins, lineWidth));
-        createSlider(slidersArr[slidersArr.length-1], sliderInfoArr[sliderInfoArr.length-1]);
-        controlSlider(exp, sliderInfoArr[sliderInfoArr.length-1]);
+        info[i] = new sliderInformations(number, playAnimation, animationType, followCursor, hideButton, buttonScale, setMargins, lineWidth);
+        createSlider(sliders[i], info[i]);
+        controlSlider(exp, info[i]);
     }
 }
