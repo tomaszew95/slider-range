@@ -93,9 +93,9 @@ var controlSlider = (e, sliderInfo) =>{
         if(sliderInfo.follow == 'false'){
             val = slider.value;
         }
-        else if(($this.offsetX >= 0) || ($this.offsetX <= $($this.target).width())){
+        else if($this.offsetX == sliderContainer.offsetX){
             console.log($this.offsetX, $($this.target).width());
-            val = ($this.offsetX * 100)/$($this.target).width();
+            val = (sliderContainer.offsetX * 100)/$(sliderContainer).width();
         }
         if(val >= margins && val <= (100 - margins)){
             controllerContainer.style.left = val + '%';
