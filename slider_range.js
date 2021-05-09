@@ -146,6 +146,7 @@ var controlSlider = (e, sliderInfo) =>{
             }
         }
         controllerContainer.style.width = sliderInfo.lineSize + 'px';
+        controllerContainer.style.setProperty("margin-left", ((sliderInfo.lineSize*(-0.5)) + 'px'));
         if(sliderInfo.hideCta=='true'){
             controller.style.opacity = 0;
         }
