@@ -190,6 +190,7 @@ var controlSlider = (e, sliderInfo) =>{
                         }
                     });
                     setSliders(currentPageSliderObjects, experience);
+                    console.log(currentPageSliderObjects);
                 }
             })
     });
@@ -251,7 +252,8 @@ var setSliders = (sliders, exp) => {
             }
         });
         info[i] = new sliderInformations(number, playAnimation, animationType, followCursor, hideButton, buttonScale, setMargins, lineWidth);
-        createSlider(sliders[i], info[i]);
+        let mainSlider = createSlider(sliders[i], info[i]);
+        console.log(mainSlider);
         controlSlider(exp, info[i]);
     }
 }
