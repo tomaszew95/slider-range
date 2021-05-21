@@ -75,7 +75,8 @@ input[type=range]::-moz-range-track {
     width: 40%;
 }
 .left-arrow{
-    transform: rotate(180deg);
+    -webkit-transform: scale(-1, 1);
+    transform: scale(-1, 1);
 }
 .arrow{
     fill: black;
