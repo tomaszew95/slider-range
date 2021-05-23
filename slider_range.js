@@ -213,7 +213,7 @@ var setSliders = (sliders, exp) => {
         var animationType = sliderPlugin.getAttribute("animation-type");
         var followCursor = sliderPlugin.getAttribute("follow-cursor");
         var hideButton = sliderPlugin.getAttribute("hide-button");
-        var buttonScale = parseFloat(sliderPlugin.getAttribute("button-size"));
+        var buttonScale = parseFloat(sliderPlugin.getAttribute("button-scale"));
         var setMargins = sliderPlugin.getAttribute("set-margins");
         var lineWidth = parseFloat(sliderPlugin.getAttribute("line-width"));
 
