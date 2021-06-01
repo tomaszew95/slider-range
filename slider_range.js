@@ -151,9 +151,9 @@ var controlSlider = (e, sliderInfo) =>{
         }
         controller.style.transform = 'scale(' + sliderInfo.ctaScale + ')';
         if(sliderInfo.setMargin=='true'){
-            margins = ((($(controller).width()*parseFloat(sliderInfo.ctaScale))/2)*100)/(parseFloat(sliderContainer.style.width));
+            margins = ((($(controller).width()*parseFloat(sliderInfo.ctaScale))/2)*100)/($(sliderContainer).width());
             // margins = ((((parseFloat(controller.style.width))*sliderInfo.ctaScale)/2)*100)/(parseFloat(sliderContainer.style.width));
-            console.log(margins, $(controller).width(), parseFloat(sliderInfo.ctaScale), (parseFloat(sliderContainer.style.width)));
+            console.log(margins, $(controller).width(), parseFloat(sliderInfo.ctaScale), sliderContainer, $(sliderContainer));
         }
     }
     localInitialFunction();
