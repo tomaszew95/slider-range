@@ -150,7 +150,7 @@ var controlSlider = (e, sliderInfo) =>{
             controller.style.opacity = 0;
         }
         controller.style.transform = 'scale(' + sliderInfo.ctaScale + ')';
-        if(sliderInfo.setMargin=='true'){
+        if(sliderInfo.setMargins=='true'){
             margins = ((($(controller).width()*sliderInfo.ctaScale)/2)*100)/($(sliderContainer).width());
         }
     }
