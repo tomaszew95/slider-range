@@ -47,7 +47,7 @@ var createSlider = (obj, sliderInfo) => {
     return divs[0];
 }
 
-var controlSlider = (e, sliderInfo) =>{
+var controlSlider = (e, sliderInfo, sliderWid) =>{
     //defining images
     var beforeComponents = e.findLayersByTag('before' + sliderInfo.num).layers;
     var afterComponents = e.findLayersByTag('after' + sliderInfo.num).layers;
@@ -151,9 +151,9 @@ var controlSlider = (e, sliderInfo) =>{
         }
         controller.style.transform = 'scale(' + sliderInfo.ctaScale + ')';
         if(sliderInfo.setMargin=='true'){
-            margins = ((($(controller).width()*parseFloat(sliderInfo.ctaScale))/2)*100)/($(sliderContainer).width());
+            margins = ((($(controller).width()*parseFloat(sliderInfo.ctaScale))/2)*100)/sliderWid;
             // margins = ((((parseFloat(controller.style.width))*sliderInfo.ctaScale)/2)*100)/(parseFloat(sliderContainer.style.width));
-            console.log(margins, $(controller).width(), parseFloat(sliderInfo.ctaScale), sliderContainer, $(sliderContainer));
+            console.log(margins, $(controller).width(), parseFloat(sliderInfo.ctaScale), sliderWid);
         }
     }
     localInitialFunction();
@@ -209,6 +209,7 @@ class sliderInformations{
 var setSliders = (sliders, exp) => {
     var info = [];
     for(let i = 0;i<sliders.length;i++){
+        var sliderWidth = sliders[i].getWidth();
         var tags = sliders[i].getTags();
         var number = i +1;
         var playAnimation = sliderPlugin.getAttribute("play-animation");
@@ -251,6 +252,6 @@ var setSliders = (sliders, exp) => {
         });
         info[i] = new sliderInformations(number, playAnimation, animationType, followCursor, hideButton, buttonScale, setMargins, lineWidth);
         createSlider(sliders[i], info[i]);
-        controlSlider(exp, info[i]);
+        controlSlider(exp, info[i], sliderWidth);
     }
 }
