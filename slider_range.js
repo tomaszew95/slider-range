@@ -153,7 +153,7 @@ var controlSlider = (e, sliderInfo) =>{
         if(sliderInfo.setMargin=='true'){
             // margins = ((($(controller).width()*sliderInfo.ctaScale)/2)*100)/($(sliderContainer).width());
             margins = ((((parseFloat(controller.style.width))*sliderInfo.ctaScale)/2)*100)/(parseFloat(sliderContainer.style.width));
-            console.log(margins, controller.style.width, sliderInfo.ctaScale, sliderContainer.style.width);
+            console.log(margins, $(controller).width(), sliderInfo.ctaScale, $(sliderContainer).width());
         }
     }
     localInitialFunction();
