@@ -47,7 +47,7 @@ var createSlider = (obj, sliderInfo) => {
     return divs[0];
 }
 
-var controlSlider = (e, sliderInfo, sliderWid) =>{
+var controlSlider = (e, sliderInfo, sliderWid, pageCont) =>{
     //defining images
     var beforeComponents = e.findLayersByTag('before' + sliderInfo.num).layers;
     var afterComponents = e.findLayersByTag('after' + sliderInfo.num).layers;
@@ -94,7 +94,7 @@ var controlSlider = (e, sliderInfo, sliderWid) =>{
             val = slider.value;
         }
         else if(($this.offsetX >= 0) || ($this.offsetX <= $($this.target).width())){
-            let pageWidth = e.getCurrentPage().getWidth();
+            let pageWidth = parseFloat(pageCont.style.width);
             let windowWidth = window.innerWidth;
             let proportion = pageWidth/windowWidth;
             console.log(pageWidth, windowWidth, $this, $(sliderContainer).width());
@@ -190,7 +190,7 @@ var controlSlider = (e, sliderInfo, sliderWid) =>{
                             return $object;
                         }
                     });
-                    setSliders(currentPageSliderObjects, experience);
+                    setSliders(currentPageSliderObjects, experience, pageContainer);
                 }
             })
     });
@@ -208,7 +208,7 @@ class sliderInformations{
         this.lineSize = lineSize;
     }
 }
-var setSliders = (sliders, exp) => {
+var setSliders = (sliders, exp, pageContainer) => {
     var info = [];
     for(let i = 0;i<sliders.length;i++){
         var sliderWidth = sliders[i].getWidth();
@@ -254,6 +254,6 @@ var setSliders = (sliders, exp) => {
         });
         info[i] = new sliderInformations(number, playAnimation, animationType, followCursor, hideButton, buttonScale, setMargins, lineWidth);
         createSlider(sliders[i], info[i]);
-        controlSlider(exp, info[i], sliderWidth);
+        controlSlider(exp, info[i], sliderWidth, pageContainer);
     }
 }
