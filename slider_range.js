@@ -94,7 +94,7 @@ var controlSlider = (e, sliderInfo, sliderWid) =>{
             val = slider.value;
         }
         else if(($this.offsetX >= 0) || ($this.offsetX <= $($this.target).width())){
-            val = ($this.offsetX * 100)/$($this.target).width();
+            val = ($this.clientX/$(sliderContainer).width())*100;
         }
         if(val >= margins && val <= (100 - margins)){
             controllerContainer.style.left = val + '%';
@@ -152,8 +152,6 @@ var controlSlider = (e, sliderInfo, sliderWid) =>{
         controller.style.transform = 'scale(' + sliderInfo.ctaScale + ')';
         if(sliderInfo.setMargin=='true'){
             margins = ((($(controller).width()*parseFloat(sliderInfo.ctaScale))/2)*100)/sliderWid;
-            // margins = ((((parseFloat(controller.style.width))*sliderInfo.ctaScale)/2)*100)/(parseFloat(sliderContainer.style.width));
-            console.log(margins, $(controller).width(), parseFloat(sliderInfo.ctaScale), sliderWid);
         }
     }
     localInitialFunction();
