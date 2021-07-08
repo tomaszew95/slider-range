@@ -94,7 +94,7 @@ var controlSlider = (e, sliderInfo, sliderWid) =>{
             val = slider.value;
         }
         else if(($this.offsetX >= 0) || ($this.offsetX <= $($this.target).width())){
-            val = ($this.clientX/$(sliderContainer).width())*100;
+            val = ($this.offsetX/$(sliderContainer).width())*100;
         }
         if(val >= margins && val <= (100 - margins)){
             controllerContainer.style.left = val + '%';
@@ -171,6 +171,7 @@ var controlSlider = (e, sliderInfo, sliderWid) =>{
             })
             .done(function (experience) {
                 window.myExperience = experience;
+                console.log(experience);
                 var sliderObjects = experience.findLayersByTag("slider-range").layers;
 
                 experience.on(CerosSDK.EVENTS.PAGE_CHANGED, pageChangedCallback);
