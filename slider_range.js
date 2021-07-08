@@ -97,6 +97,7 @@ var controlSlider = (e, sliderInfo, sliderWid) =>{
             let pageWidth = e.getCurrentPage().getWidth();
             let windowWidth = window.innerWidth;
             let proportion = pageWidth/windowWidth;
+            console.log(pageWidth, windowWidth, $this.offsetX, $(sliderContainer).width());
             val = (($this.offsetX*proportion)/$(sliderContainer).width())*100;
         }
         if(val >= margins && val <= (100 - margins)){
