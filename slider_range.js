@@ -94,9 +94,9 @@ var controlSlider = (e, sliderInfo, sliderWid, pageCont) =>{
             val = slider.value;
         }
         else if(($this.offsetX >= 0) || ($this.offsetX <= $($this.target).width())){
-            let pageWidth = parseFloat($(pageCont).width());
+            let pageWidth = Math.ceil($(pageCont).width());
             let windowWidth = window.innerWidth;
-            let proportion = pageWidth/windowWidth;
+            let proportion = parseFloat(pageWidth)/windowWidth;
             console.log(pageWidth, windowWidth, $this, $(sliderContainer).width());
             val = (($this.clientX*proportion)/$(sliderContainer).width())*100;
         }
