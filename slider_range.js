@@ -99,11 +99,12 @@ var controlSlider = (e, sliderInfo, sliderWid, pageCont) =>{
             let windowWidth = window.innerWidth;
             let pageWidth = e.getCurrentPage().getWidth();
             let proportion = windowWidth/parseFloat(pageWidth);
-            let sliderParentLeft = parseFloat($(sliderContainer).parent().css("left"))*(windowWidth/parseFloat(pageWidth));
-            let newVal = (($this.clientX*proportion)/$(sliderContainer).width())*100;
+            let sliderParentLeft = parseFloat($(sliderContainer).parent().css("left"));
+            let newVal = ((($this.clientX/proportion)-sliderParentLeft)/Math.ceil($(sliderContainer).width()))*100;
             let oldVal = val;
             val = (newVal<=100 && newVal>=0) ? newVal : oldVal;
             let test = {
+                t: $this,
                 pageWidth: pageWidth,
                 windowWidth: windowWidth,
                 proportion: proportion,
