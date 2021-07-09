@@ -109,7 +109,7 @@ var controlSlider = (e, sliderInfo, sliderWid, pageCont) =>{
                 sliderParentLeft: sliderParentLeft,
                 value: val
             }
-            console.log(test);
+            console.log(test) 
         }
         if(val >= margins && val <= (100 - margins)){
             controllerContainer.style.left = val + '%';
