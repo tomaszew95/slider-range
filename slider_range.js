@@ -94,10 +94,10 @@ var controlSlider = (e, sliderInfo, sliderWid, pageCont) =>{
             val = slider.value;
         }
         else{
-            // let pageLeftMargin = parseFloat(pageCont.querySelector(".page-scroll").style.left);
-            // let pageWidth = $(pageCont).width() + pageLeftMargin;
+            // let pageWidth = e.getCurrentPage().getWidth();
+            let pageLeftMargin = parseFloat(pageCont.querySelector(".page-scroll").style.left);
+            let pageWidth = $(pageCont).width() - pageLeftMargin;
             let windowWidth = window.innerWidth;
-            let pageWidth = e.getCurrentPage().getWidth();
             let proportion = windowWidth/parseFloat(pageWidth);
             let sliderParentLeft = parseFloat($(sliderContainer).parent().css("left"));
             let newVal = ((($this.clientX/proportion)-sliderParentLeft)/Math.ceil($(sliderContainer).width()))*100;
@@ -110,7 +110,7 @@ var controlSlider = (e, sliderInfo, sliderWid, pageCont) =>{
                 proportion: proportion,
                 clientX:$this.clientX,
                 sliderParentLeft: sliderParentLeft,
-                sliderWidth: $(sliderContainer).width(),
+                sliderWidth: Math.ceil($(sliderContainer).width()),
                 value: val
             }
             console.log(test);
