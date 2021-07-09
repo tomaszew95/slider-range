@@ -97,7 +97,7 @@ var controlSlider = (e, sliderInfo, sliderWid, pageCont) =>{
             let pageWidth = $(pageCont).width() + parseFloat(pageCont.querySelector(".page-scroll").style.left);
             let windowWidth = window.innerWidth;
             let proportion = parseFloat(pageWidth)/windowWidth;
-            let newVal = (Math.floor($this.clientX*proportion)/$(sliderContainer).width())*100;
+            let newVal = (Math.floor($this.offsetX*proportion)/$(sliderContainer).width())*100;
             let oldVal = val;
             val = (newVal<=100 && newVal>=0) ? newVal : oldVal;
             console.log(val);
