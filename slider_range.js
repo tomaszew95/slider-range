@@ -96,11 +96,11 @@ var controlSlider = (e, sliderInfo, sliderWid, pageCont) =>{
         else{
             let pageLeftMargin = parseFloat(pageCont.querySelector(".page-scroll").style.left);
             // let pageWidth = e.getCurrentPage().getWidth();
-            let pageWidth = $(pageCont).width();
+            let pageWidth = $(pageCont).width() + pageLeftMargin;
             let windowWidth = window.innerWidth;
             let proportion = parseFloat(pageWidth)/windowWidth;
             let sliderParentLeft = parseFloat($(sliderContainer).parent().css("left"))*(windowWidth/parseFloat(pageWidth));
-            let newVal = ((($this.clientX-sliderParentLeft-pageLeftMargin)*proportion)/$(sliderContainer).width())*100;
+            let newVal = ((($this.clientX-sliderParentLeft)*proportion)/$(sliderContainer).width())*100;
             let oldVal = val;
             val = (newVal<=100 && newVal>=0) ? newVal : oldVal;
             let test = {
