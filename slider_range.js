@@ -105,6 +105,8 @@ var controlSlider = (e, sliderInfo, sliderWid, pageCont) =>{
             val = (newVal<=100 && newVal>=0) ? newVal : oldVal;
             let test = {
                 t: $this,
+                viewportWidth: $(pageCont).width(),
+                pageMargin: pageLeftMargin,
                 pageWidth: pageWidth,
                 windowWidth: windowWidth,
                 proportion: proportion,
