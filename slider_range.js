@@ -69,11 +69,6 @@ var controlSlider = (e, sliderInfo, sliderWid, pageCont) =>{
     var controller = controllerContainer.querySelector('.controller');
     var val = slider.getAttribute("value");
     var margins = 0;
-    //defining variables for 'follow'
-    let pageWidth = Math.floor($(pageCont).width()) + parseFloat(pageCont.querySelector(".page-scroll").style.left);
-    let windowWidth = window.innerWidth;
-    let proportion = parseFloat(pageWidth)/windowWidth;
-    let sliderParentLeft = parseFloat($(sliderContainer).parent().css("left"))*(windowWidth/parseFloat(pageWidth));
 
     if(sliderInfo.follow=='false'){
         slider.addEventListener("input", sliderMove);
@@ -99,7 +94,11 @@ var controlSlider = (e, sliderInfo, sliderWid, pageCont) =>{
             val = slider.value;
         }
         else{
-            let newVal = (Math.floor(($this.clientX-sliderParentLeft)*proportion)/$(sliderContainer).width())*100;
+            let pageWidth = Math.ceil($(pageCont).width()) + parseFloat(pageCont.querySelector(".page-scroll").style.left);
+            let windowWidth = window.innerWidth;
+            let proportion = parseFloat(pageWidth)/windowWidth;
+            let sliderParentLeft = parseFloat($(sliderContainer).parent().css("left"))*(windowWidth/parseFloat(pageWidth));
+            let newVal = (Math.ceil(($this.clientX-sliderParentLeft)*proportion)/$(sliderContainer).width())*100;
             let oldVal = val;
             val = (newVal<=100 && newVal>=0) ? newVal : oldVal;
             console.log($this.clientX, val);
