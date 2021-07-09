@@ -98,10 +98,10 @@ var controlSlider = (e, sliderInfo, sliderWid, pageCont) =>{
             let windowWidth = window.innerWidth;
             let proportion = parseFloat(pageWidth)/windowWidth;
             let sliderParentLeft = parseFloat($(sliderContainer).parent().css("left"))*(windowWidth/parseFloat(pageWidth));
-            let newVal = (Math.floor(($this.clientX-sliderParentLeft)*proportion)/$(sliderContainer).width())*100;
+            let newVal = ((($this.clientX-sliderParentLeft)*proportion)/$(sliderContainer).width())*100;
             let oldVal = val;
             val = (newVal<=100 && newVal>=0) ? newVal : oldVal;
-            console.log($this.clientX, sliderParentLeft, val);
+            console.log(pageWidth,windowWidth, $this.clientX, sliderParentLeft, val);
         }
         if(val >= margins && val <= (100 - margins)){
             controllerContainer.style.left = val + '%';
