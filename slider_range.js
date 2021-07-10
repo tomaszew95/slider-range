@@ -107,7 +107,7 @@ var controlSlider = (e, sliderInfo, sliderWid, pageCont) =>{
             let pageMargins = (pageLeftMargin+pageRightMargin)*proportion;
 
             let sliderParentLeft = parseFloat($(sliderContainer).parent().css("left"));
-            let newVal = (((($this.clientX+pageMargins)/proportion)-sliderParentLeft)/Math.ceil($(sliderContainer).width()))*100;
+            let newVal = ((($this.clientX/proportion)-sliderParentLeft-pageLeftMargin)/Math.ceil($(sliderContainer).width()))*100;
             let oldVal = val;
             val = (newVal<=100 && newVal>=0) ? newVal : oldVal;
             let test = {
