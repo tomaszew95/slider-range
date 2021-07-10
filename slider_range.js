@@ -94,15 +94,15 @@ var controlSlider = (e, sliderInfo, sliderWid, pageCont) =>{
             val = slider.value;
         }
         else{
+            let viewportWidth = $(pageCont).parent().width();
+            let pinnedContainerWidth = $(pageCont).siblings(".pinned-container").width();
             //proportion
             // let pageWidth = e.getCurrentPage().getWidth();
             let pageWidth = Math.floor($(pageCont).width());
             let windowWidth = window.innerWidth;
-            let proportion = windowWidth/parseFloat(pageWidth);
+            let proportion = windowWidth/viewportWidth;
             //margins
             let pageLeftMargin = Math.ceil(parseFloat(pageCont.querySelector(".page-scroll").style.left));
-            let viewportWidth = $(pageCont).parent().width();
-            let pinnedContainerWidth = $(pageCont).siblings(".pinned-container").width();
             let pageRightMargin = Math.ceil(viewportWidth-pinnedContainerWidth-pageLeftMargin);
             let pageMargins = (pageLeftMargin+pageRightMargin)*proportion;
 
