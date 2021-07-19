@@ -94,37 +94,17 @@ var controlSlider = (e, sliderInfo, sliderWid, pageCont) =>{
             val = slider.value;
         }
         else{
-            let viewportWidth = $(pageCont).parent().width();
-            let pinnedContainerWidth = $(pageCont).siblings(".pinned-container").width();
             //proportion
-            // let pageWidth = e.getCurrentPage().getWidth();
-            let pageWidth = Math.floor($(pageCont).width());
+            let viewportWidth = $(pageCont).parent().width();
             let windowWidth = window.innerWidth;
             let proportion = windowWidth/viewportWidth;
             //margins
             let pageLeftMargin = Math.ceil(parseFloat(pageCont.querySelector(".page-scroll").style.left));
-            let pageRightMargin = Math.ceil(viewportWidth-pinnedContainerWidth-pageLeftMargin);
-            let pageMargins = (pageLeftMargin+pageRightMargin)*proportion;
 
             let sliderParentLeft = parseFloat($(sliderContainer).parent().css("left"));
             let newVal = ((($this.clientX/proportion)-sliderParentLeft-pageLeftMargin)/Math.ceil($(sliderContainer).width()))*100;
             let oldVal = val;
             val = (newVal<=100 && newVal>=0) ? newVal : oldVal;
-            let test = {
-                t: $this,
-                viewportWidth: viewportWidth,
-                pageContainerWidth: $(pageCont).width(),
-                pageMarginLeft: pageLeftMargin,
-                pageMarginRight: pageRightMargin,
-                pageWidth: e.getCurrentPage().getWidth(),
-                windowWidth: windowWidth,
-                proportion: proportion,
-                clientX:$this.clientX,
-                sliderParentLeft: sliderParentLeft,
-                sliderWidth: Math.ceil($(sliderContainer).width()),
-                value: val
-            }
-            console.log(test);
         }
         if(val >= margins && val <= (100 - margins)){
             controllerContainer.style.left = val + '%';
