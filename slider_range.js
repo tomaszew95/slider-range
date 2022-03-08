@@ -33,7 +33,7 @@ var createSlider = (obj, sliderInfo) => {
     //creating input element
     var sliderRange = document.createElement('input');
     var inputAttrbutes = ['type', 'min', 'max', 'value', 'step', 'class', 'style'];
-    var attributesProperty = ["range", "0", "100", "50", "any", "slider-range","width: 100%; height: 100%;"];
+    var attributesProperty = ["range", "0", "5000", "0", "1000", "slider-range","width: 100%; height: 100%;"];
     for(let y = 0; y< inputAttrbutes.length; y++){
         sliderRange.setAttribute(inputAttrbutes[y], attributesProperty[y]);
     }
