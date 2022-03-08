@@ -136,7 +136,7 @@ var controlSlider = (e, sliderInfo, sliderWid, pageCont) =>{
         /* basics settings */
         controllerContainer.style.left = val + '%';
         for(let before of beforeComps){
-            clipPathFunction(before, ('0% 50% 0% 0%'));
+            clipPathFunction(before, ('0% 0% 0% 0%'));
         }for(let after of afterComps){
             clipPathFunction(after, ('0% 0% 0% 50%'));
         }
